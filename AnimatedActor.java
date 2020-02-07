@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class AnimatedActor extends Actor
+public class AnimatedActor extends ScrollingActor
 {
     private GreenfootImage[] movingFrames = null;
     private GreenfootImage[] idleFrames = null;
@@ -41,7 +41,9 @@ public class AnimatedActor extends Actor
     }
     
     public void act() 
-    {   if(isAnimating){
+    {   
+        super.act();
+        if(isAnimating){
             if(counter++ > delay && isMoving){
                 if(movingFrames.length == 0){
                     return;
@@ -71,6 +73,9 @@ public class AnimatedActor extends Actor
     
     public void mirrorAll(){
         for(GreenfootImage image : movingFrames){
+            image.mirrorHorizontally();
+        }
+        for(GreenfootImage image : idleFrames){
             image.mirrorHorizontally();
         }
     }

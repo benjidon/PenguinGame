@@ -12,12 +12,18 @@ public class Slippy extends Character
     private boolean isSliding = false;
     private boolean facingForwards = true;
     
+    private static final int SCROLL_WIDTH = 160;
+    private static final float JUMP = 8.0f, WALK = 4.0f;
+
+    private int absoluteScroll, initialXPosition, initialYPosition;
+    
     /**
      * Act - do whatever the Slippy wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public Slippy(){
-        super("slippy", 8, 11); 
+        super("slippy", 8, 11);
+        absoluteScroll = 0;
     }
     
     
@@ -40,15 +46,19 @@ public class Slippy extends Character
             }
         }
         updateOrientation();
+        
     }
     
     public void updateOrientation(){
-        if(Greenfoot.isKeyDown("left") && facingForwards){
-            facingForwards = false;
-            mirrorAll();
-        } else if(Greenfoot.isKeyDown("right") && !facingForwards){
-            facingForwards = true;
-            mirrorAll();
+        if((Greenfoot.isKeyDown("left") && facingForwards) 
+            || (Greenfoot.isKeyDown("right") && !facingForwards)){
+            reverseOrientation();
         }
+    }
+    
+    public void reverseOrientation(){
+        facingForwards = !facingForwards;
+        mirrorAll();
+        slippyDown.mirrorHorizontally();
     }
 }
