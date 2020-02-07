@@ -12,8 +12,8 @@ public class Character extends AnimatedActor
      * Act - do whatever the Character wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    public Character(String name, int imageCount){
-        super(name, imageCount);
+    public Character(String name, int movingCount, int idleCount){
+        super(name, movingCount, idleCount);
     }
     
     public void act() 
