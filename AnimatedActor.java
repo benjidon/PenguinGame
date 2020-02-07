@@ -13,6 +13,8 @@ public class AnimatedActor extends Actor
     int counter = 0;
     int delay = 4;
     
+    private boolean isAnimating = true;
+    
     /**
      * Act - do whatever the AnimatedActor wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -27,15 +29,24 @@ public class AnimatedActor extends Actor
     }
     
     public void act() 
-    {
-        if(frames.length == 0){
-            return;
-        }
-        if(counter++ > delay){
-            counter = 0;
-            frame = (frame + 1) % frames.length;
-            setImage(frames[frame]);
+    {   if(isAnimating){
+            if(frames.length == 0){
+                return;
+            }
+            if(counter++ > delay){
+                counter = 0;
+                frame = (frame + 1) % frames.length;
+                setImage(frames[frame]);
+            }
         }
         
-    }    
+    }
+    
+    public void disableAnimation(){
+        isAnimating = false;
+    }
+    
+    public void enableAnimation(){
+        isAnimating = true;
+    }
 }
