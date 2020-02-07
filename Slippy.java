@@ -12,8 +12,13 @@ public class Slippy extends Character
      * Act - do whatever the Slippy wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    public Slippy(){
+        super("slippy", 8); 
+    }
+    
+    
     public void act() 
     {
-        // Add your action code here.
+        super.act();
     }    
 }

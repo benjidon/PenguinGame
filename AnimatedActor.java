@@ -11,6 +11,7 @@ public class AnimatedActor extends Actor
     private GreenfootImage[] frames = null;
     int frame = 0;
     int counter = 0;
+    int delay = 4;
     
     /**
      * Act - do whatever the AnimatedActor wants to do. This method is called whenever
@@ -30,5 +31,11 @@ public class AnimatedActor extends Actor
         if(frames.length == 0){
             return;
         }
+        if(counter++ > delay){
+            counter = 0;
+            frame = (frame + 1) % frames.length;
+            setImage(frames[frame]);
+        }
+        
     }    
 }
