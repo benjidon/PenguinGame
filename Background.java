@@ -15,6 +15,6 @@ public class Background extends ScrollingActor
     public void act() 
     {
         super.act();
-        ((MyWorld)getWorld()).setWorldDimensions(getX(), getY(), getImage().getWidth(), getImage().getHeight());// Add your action code here.
+        ((ScrollWorld)getWorld()).setWorldDimensions(getX(), getY(), getImage().getWidth(), getImage().getHeight());// Add your action code here.
     }    
 }
