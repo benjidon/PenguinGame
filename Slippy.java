@@ -26,6 +26,9 @@ public class Slippy extends Character
     private boolean onGround = true;
     private boolean holding = false;
     
+    static GreenfootSound jump  = new GreenfootSound("jump.wav");
+
+    
     /**
      * Act - do whatever the Slippy wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -33,6 +36,7 @@ public class Slippy extends Character
     public Slippy(){
         super("slippy", 8, 11);
         absoluteScroll = 0;
+        jump.setVolume(87);
     }
     
     
@@ -112,6 +116,7 @@ public class Slippy extends Character
             yVelocity -= jumpSpeed;
             onGround = false;
             holding = true;
+            jump.play();
         }
         
         if (!Greenfoot.isKeyDown("up")) {
