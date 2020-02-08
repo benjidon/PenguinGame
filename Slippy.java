@@ -132,7 +132,6 @@ public class Slippy extends Character
             if (yVelocity < 18) {
                 yVelocity = -jumpSpeed + (int)(1.8*(timeStep / 2));
             }
-            System.out.println(yVelocity);
             timeStep += 1;
         }
         if (getY() >= 430) {
