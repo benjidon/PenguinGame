@@ -1,15 +1,20 @@
 #Greenfoot project file
-class.Background.image=Background_trees\ .png
-class.ScrollWorld.image=Background_101.png
-dependency1.from=ScrollWorld
-dependency1.to=Slippy
+class.Background.image=NedForest.png
+class.Intro.image=starrynight.png
+dependency1.from=Intro
+dependency1.to=SplashScreen
 dependency1.type=UsesDependency
 dependency2.from=ScrollWorld
+<<<<<<< HEAD
 dependency2.to=Ground
+=======
+dependency2.to=Slippy
+>>>>>>> c67bf98f91b4a767c9a37b5fdd02062e3fe5fc12
 dependency2.type=UsesDependency
 dependency3.from=Background
 dependency3.to=ScrollWorld
 dependency3.type=UsesDependency
+<<<<<<< HEAD
 editor.fx.0.height=722
 editor.fx.0.width=800
 editor.fx.0.x=246
@@ -17,6 +22,18 @@ editor.fx.0.y=59
 height=754
 package.numDependencies=3
 package.numTargets=8
+=======
+dependency4.from=SplashScreen
+dependency4.to=ScrollWorld
+dependency4.type=UsesDependency
+editor.fx.0.height=771
+editor.fx.0.width=994
+editor.fx.0.x=92
+editor.fx.0.y=23
+height=745
+package.numDependencies=4
+package.numTargets=9
+>>>>>>> c67bf98f91b4a767c9a37b5fdd02062e3fe5fc12
 project.charset=UTF-8
 publish.hasSource=false
 publish.locked=true
@@ -30,7 +47,7 @@ readme.name=@README
 readme.width=47
 readme.x=10
 readme.y=10
-simulation.speed=50
+simulation.speed=52
 target1.height=50
 target1.name=ScrollingActor
 target1.showInterface=false
@@ -53,7 +70,11 @@ target3.width=100
 target3.x=0
 target3.y=0
 target4.height=50
+<<<<<<< HEAD
 target4.name=Ground
+=======
+target4.name=Intro
+>>>>>>> c67bf98f91b4a767c9a37b5fdd02062e3fe5fc12
 target4.showInterface=false
 target4.type=ClassTarget
 target4.width=80
@@ -63,17 +84,26 @@ target5.height=50
 target5.name=ScrollWorld
 target5.showInterface=false
 target5.type=ClassTarget
+<<<<<<< HEAD
 target5.width=90
 target5.x=0
 target5.y=0
 target6.height=50
 target6.name=Slippy
+=======
+target5.width=100
+target5.x=0
+target5.y=0
+target6.height=50
+target6.name=Snowman
+>>>>>>> c67bf98f91b4a767c9a37b5fdd02062e3fe5fc12
 target6.showInterface=false
 target6.type=ClassTarget
 target6.width=80
 target6.x=0
 target6.y=0
 target7.height=50
+<<<<<<< HEAD
 target7.name=AnimatedActor
 target7.showInterface=false
 target7.type=ClassTarget
@@ -82,13 +112,38 @@ target7.x=0
 target7.y=0
 target8.height=50
 target8.name=Solid
+=======
+target7.name=SplashScreen
+target7.showInterface=false
+target7.type=ClassTarget
+target7.width=110
+target7.x=0
+target7.y=0
+target8.height=50
+target8.name=Slippy
+>>>>>>> c67bf98f91b4a767c9a37b5fdd02062e3fe5fc12
 target8.showInterface=false
 target8.type=ClassTarget
 target8.width=80
 target8.x=0
 target8.y=0
+<<<<<<< HEAD
 version=3.0.0
 width=1239
 world.lastInstantiated=ScrollWorld
 xPosition=201
 yPosition=58
+=======
+target9.height=50
+target9.name=AnimatedActor
+target9.showInterface=false
+target9.type=ClassTarget
+target9.width=120
+target9.x=0
+target9.y=0
+version=3.0.0
+width=1235
+world.lastInstantiated=Intro
+xPosition=75
+yPosition=34
+>>>>>>> c67bf98f91b4a767c9a37b5fdd02062e3fe5fc12
