@@ -90,8 +90,8 @@ public class ScrollWorld extends World
     }
     
     public void scrollBackground(int direction) {
-        setBackground("white.jpg");
-        getBackground().drawImage(background, (dx / 20), 0);
+        setBackground("starrynight.png");
+        getBackground().drawImage(background, (dx / 50), 0);
         getBackground().drawImage(treesBg, (dx / 2), 250);
         getBackground().drawImage(treesBg, (dx + 2000) / 2, 250);
         dx += direction;
