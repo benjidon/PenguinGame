@@ -40,8 +40,10 @@ public class ScrollWorld extends World
         {
             music.playLoop();
             playing = true;
-            music.setVolume(65);
+            music.setVolume(0);
         }
+        
+        buildWorld();
         
         Slippy slippy = new Slippy();
         addObject(slippy, 480, 430);
@@ -105,6 +107,7 @@ public class ScrollWorld extends World
    
     }
     
+    
     public void act() {
         if (Greenfoot.isKeyDown("right")) {
             scrollBackground(-1);
@@ -112,5 +115,11 @@ public class ScrollWorld extends World
         if (Greenfoot.isKeyDown("left")) {
             scrollBackground(1);
         }
+    }
+    
+    private void buildWorld() {
+ 
+     addObject(new Ground(1), 480, 475);   
+        
     }
 }

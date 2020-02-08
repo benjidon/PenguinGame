@@ -17,6 +17,15 @@ public class Slippy extends Character
 
     private int absoluteScroll, initialXPosition, initialYPosition;
     
+    // Vars to control movement
+    private float xVelocity = 0;
+    private float initYVelocity = 0;
+    private float yVelocity = 0;
+    private float jumpSpeed = 10;
+    private double timeStep = 0.5;
+    private boolean onGround = true;
+    private boolean holding = false;
+    
     /**
      * Act - do whatever the Slippy wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -45,7 +54,92 @@ public class Slippy extends Character
                 setMoving();
             }
         }
+        moveHorizontally();
+        moveVertically();
         updateOrientation();
+        
+    }
+    
+    private void moveHorizontally() {
+        setLocation(getX() + (int)xVelocity, getY());
+        
+        if (Greenfoot.isKeyDown("right"))
+        {
+            if (xVelocity < 0)
+            {
+                xVelocity = 0;
+            }
+            if (xVelocity < 5)
+            {
+                xVelocity += 1;
+            }
+        }
+        
+        if (Greenfoot.isKeyDown("left"))
+        {
+            if (xVelocity > 0)
+            {
+                xVelocity = 0;
+            }
+            if (xVelocity > -5)
+            {
+                xVelocity -= 1;
+            }
+        }
+        
+        if (Greenfoot.isKeyDown("left"))
+        {
+            if (xVelocity > 0)
+            {
+                xVelocity = 0;
+            }
+            if (xVelocity < -5)
+            {
+                xVelocity -= 1;
+            }
+        }
+        
+        if (!Greenfoot.isKeyDown("left") && !Greenfoot.isKeyDown("right"))
+        {
+            xVelocity = 0;
+        }
+        
+    }
+    
+    private void moveVertically() {
+        
+        if (Greenfoot.isKeyDown("up") && onGround == true  && !holding) {
+            yVelocity -= jumpSpeed;
+            onGround = false;
+            holding = true;
+        }
+        
+        if (!Greenfoot.isKeyDown("up")) {
+            holding = false;
+        }
+        
+        if (holding && timeStep < 15 && !onGround) {
+            yVelocity -= 14;
+        }
+                
+        if (onGround == false) {
+            if ((int)(getY() + yVelocity) > 430) {
+                setLocation(getX(), 430);
+            } else {
+                setLocation(getX(), (int)(getY() + yVelocity));
+            }
+            
+            if (yVelocity < 18) {
+                yVelocity = -jumpSpeed + (int)(1.8*(timeStep / 2));
+            }
+            System.out.println(yVelocity);
+            timeStep += 1;
+        }
+        if (getY() >= 430) {
+            onGround = true;
+            timeStep = 0;
+        }
+        
         
     }
     
