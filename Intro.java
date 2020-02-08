@@ -18,12 +18,16 @@ public class Intro extends World
         SplashScreen splash = new SplashScreen();
         addObject(splash, 470, 300);
         
+        
+        
+    }
+    
+    public void act(){
         if(!menuMusic.isPlaying() && playing == false)
         {
             menuMusic.playLoop();
             playing = true;
             menuMusic.setVolume(65);
         }
-        
     }
 }
