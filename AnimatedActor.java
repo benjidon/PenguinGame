@@ -14,8 +14,8 @@ public class AnimatedActor extends ScrollingActor
     private boolean isAnimating = true;
     private boolean isMoving = true;
     
-    private static final int NORMAL_DELAY = 4;
-    private static final int SLOW_DELAY = 50;
+    public static final int NORMAL_DELAY = 10;
+    public static final int SLOW_DELAY = 50;
     
     int frame = 0;
     int counter = 0;
