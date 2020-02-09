@@ -124,7 +124,7 @@ public class Slippy extends Character
         }
         
         if (holding && timeStep < 15 && !onGround) {
-            yVelocity -= 14;
+            yVelocity -= 12;
         }
                 
         if (onGround == false) {
@@ -135,10 +135,12 @@ public class Slippy extends Character
             }
             
             if (yVelocity < 18) {
-                yVelocity = -jumpSpeed + (int)(1.8*(timeStep / 2));
+                yVelocity = (int)(-jumpSpeed) + (int)(.77*Math.pow(timeStep,1.1));
             }
-            timeStep += 1;
+            timeStep += .8;
+           //System.out.println(yVelocity);
         }
+        
         if (getY() >= 430) {
             onGround = true;
             timeStep = 0;

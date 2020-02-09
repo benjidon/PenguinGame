@@ -1,5 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
+import java.util.*;
 /**
  * Write a description of class ScrollWorld here.
  * 
@@ -18,6 +18,7 @@ public class ScrollWorld extends World
     private GreenfootImage background = null;
     private GreenfootImage treesBg = null;
     
+    private Actor mainActor = null;
     
     /**
      * Constructor for objects of class ScrollWorld.
@@ -26,7 +27,7 @@ public class ScrollWorld extends World
     public ScrollWorld()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(960, 600, 1);
+        super(960, 600, 1, false);
         worldWidth = getWidth();
         worldHeight = getHeight();
         
@@ -40,12 +41,13 @@ public class ScrollWorld extends World
         {
             music.playLoop();
             playing = true;
-            music.setVolume(0);
+            music.setVolume(80);
         }
         
         buildWorld();
         
         Slippy slippy = new Slippy();
+        mainActor = slippy;
         addObject(slippy, 480, 430);
     }
     
@@ -107,6 +109,32 @@ public class ScrollWorld extends World
    
     }
     
+    // Scroll all actors around Slippy
+    private void scrollObjects() {
+        List<Actor> objects = getObjects(Actor.class);
+        int dx = 0;
+        int dy = 0;
+        
+        dx = mainActor.getX() - 480;
+        
+        if (dx < 0) {
+            mainActor.setLocation(480, mainActor.getY());
+        }
+        else if (dx > 0) {
+            mainActor.setLocation(480, mainActor.getY());
+        }
+       
+        
+       for (Actor object : objects) {
+            if (!object.equals(mainActor)) {
+                object.setLocation(object.getX() - dx, object.getY());
+            }   
+        }
+        
+        
+        
+    }
+    
     
     public void act() {
         if (Greenfoot.isKeyDown("right")) {
@@ -115,11 +143,17 @@ public class ScrollWorld extends World
         if (Greenfoot.isKeyDown("left")) {
             scrollBackground(1);
         }
+        
+        scrollObjects();
+        
     }
     
     private void buildWorld() {
- 
-     addObject(new Ground(1), 480, 475);   
+     
+        for (int i = 120; i < 720; i+=19) {
+            addObject(new Ground(1), i, 475);
+        }
         
+        addObject(new Ground(1), 720, 475);
     }
 }

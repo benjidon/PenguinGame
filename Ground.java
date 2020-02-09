@@ -23,12 +23,12 @@ public class Ground extends Solid
         int index = r.nextInt(3);;
         if (type == 1) { 
             img = new GreenfootImage(surface_images[index]);
-            img.scale(40, 40);
+            img.scale(30, 30);
             setImage(img);
         } 
         else if (type == 0) {
             img = new GreenfootImage (subsurface_images[index]);
-            img.scale(50, 50);
+            img.scale(30, 30);
             setImage(img);
         }
         
