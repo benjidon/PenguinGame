@@ -16,7 +16,6 @@ public class Slippy extends Character
     private static final float JUMP = 8.0f, WALK = 4.0f;
 
     private int absoluteScroll, initialXPosition, initialYPosition;
-    
     // Vars to control movement
     private float xVelocity = 0;
     private float maxXVelocity = 5;
@@ -45,6 +44,9 @@ public class Slippy extends Character
     {
         GreenfootImage image = getImage();
         image.scale(75, 75);
+        setImage(image);
+        
+        
         super.act();
         if(Greenfoot.isKeyDown("down")){
             this.disableAnimation();
@@ -66,7 +68,11 @@ public class Slippy extends Character
     }
     
     private void moveHorizontally() {
-        setLocation(getX() + (int)xVelocity, getY());
+        
+        Actor left = getOneObjectAtOffset(-13, 0, Actor.class);
+        Actor right = getOneObjectAtOffset(13, 0, Actor.class);
+        System.out.println(getX());
+
         if (isSliding) {
             maxXVelocity = 7;
         } else {
@@ -86,6 +92,10 @@ public class Slippy extends Character
             if (xVelocity > maxXVelocity && !isSliding) {
                 xVelocity = maxXVelocity;
             }
+            if (right != null) {
+                xVelocity = 0;
+            }
+            
         }
         
         if (Greenfoot.isKeyDown("left"))
@@ -101,6 +111,9 @@ public class Slippy extends Character
             if (xVelocity > -maxXVelocity && !isSliding) {
                 xVelocity = -maxXVelocity;
             }
+            if (left != null) {
+                xVelocity = 0;
+            }
             
         }
        
@@ -109,7 +122,9 @@ public class Slippy extends Character
         {
             xVelocity = 0;
         }
-        System.out.println(xVelocity);
+        
+        setLocation(getX() + (int)xVelocity, getY());
+
     }
     
     private void moveVertically() {
