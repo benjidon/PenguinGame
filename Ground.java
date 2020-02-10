@@ -14,6 +14,10 @@ public class Ground extends Solid
     private String subsurface_images[] = {"ground1.png", 
                                           "ground2.png", 
                                           "ground3.png"}; 
+                                          
+    private String fading_right[] = {"ground1_fading_right.png",
+                                     "ground2_fading_right.png",
+                                     "ground3_fading_right.png"};
     
     // 1 for surface, 0 for subsurface                            
     public Ground(int type) {
@@ -21,6 +25,11 @@ public class Ground extends Solid
         Random r = new Random();
         GreenfootImage img;
         int index = r.nextInt(3);;
+        if (type == 2) {
+            img = new GreenfootImage(fading_right[index]);
+            img.scale(30, 30);
+            setImage(img);
+        }
         if (type == 1) { 
             img = new GreenfootImage(surface_images[index]);
             img.scale(30, 30);

@@ -41,7 +41,7 @@ public class ScrollWorld extends World
         {
             music.playLoop();
             playing = true;
-            music.setVolume(80);
+            music.setVolume(0);
         }
         
         buildWorld();
@@ -130,9 +130,6 @@ public class ScrollWorld extends World
                 object.setLocation(object.getX() - dx, object.getY());
             }   
         }
-        
-        
-        
     }
     
     
@@ -150,10 +147,32 @@ public class ScrollWorld extends World
     
     private void buildWorld() {
      
-        for (int i = 120; i < 720; i+=19) {
-            addObject(new Ground(1), i, 475);
+       for (int k = 475; k < 800; k+= 30) { 
+           for (int i = 120; i < 720; i+=25) {
+               if (k == 475) {
+                   addObject(new Ground(1), i, k);
+                }
+                else {
+                    addObject(new Ground(0), i, k);
+                }
+            }
         }
         
-        addObject(new Ground(1), 720, 475);
+        
+        for (int k = 475; k < 800; k+= 30) { 
+           for (int i = 900; i < 1500; i+=25) {
+               if (k == 475) {
+                   addObject(new Ground(1), i, k);
+                }
+                else {
+                    addObject(new Ground(0), i, k);
+                }
+            }
+        }
+       
+        
+       // for (int i = 475; i > 0; i-=25)
+       // addObject(new Ground(2), 90, i);
+        
     }
 }

@@ -1,5 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
+import java.util.*;
 /**
  * Write a description of class Slippy here.
  * 
@@ -19,6 +19,7 @@ public class Slippy extends Character
     
     // Vars to control movement
     private float xVelocity = 0;
+    private float maxXVelocity = 5;
     private float initYVelocity = 0;
     private float yVelocity = 0;
     private float jumpSpeed = 10;
@@ -66,6 +67,11 @@ public class Slippy extends Character
     
     private void moveHorizontally() {
         setLocation(getX() + (int)xVelocity, getY());
+        if (isSliding) {
+            maxXVelocity = 7;
+        } else {
+            maxXVelocity = 5;
+        }
         
         if (Greenfoot.isKeyDown("right"))
         {
@@ -73,21 +79,12 @@ public class Slippy extends Character
             {
                 xVelocity = 0;
             }
-            if (xVelocity < 5)
+            if (xVelocity < maxXVelocity)
             {
                 xVelocity += 1;
             }
-        }
-        
-        if (Greenfoot.isKeyDown("left"))
-        {
-            if (xVelocity > 0)
-            {
-                xVelocity = 0;
-            }
-            if (xVelocity > -5)
-            {
-                xVelocity -= 1;
+            if (xVelocity > maxXVelocity && !isSliding) {
+                xVelocity = maxXVelocity;
             }
         }
         
@@ -97,23 +94,42 @@ public class Slippy extends Character
             {
                 xVelocity = 0;
             }
-            if (xVelocity < -5)
+            if (xVelocity > -maxXVelocity)
             {
                 xVelocity -= 1;
             }
+            if (xVelocity > -maxXVelocity && !isSliding) {
+                xVelocity = -maxXVelocity;
+            }
+            
         }
+       
         
         if (!Greenfoot.isKeyDown("left") && !Greenfoot.isKeyDown("right"))
         {
             xVelocity = 0;
         }
-        
+        System.out.println(xVelocity);
     }
     
     private void moveVertically() {
         
+        Actor below = getOneObjectAtOffset(-5, 
+        (getImage().getHeight()/2 - 2) + (int)yVelocity, Actor.class);
+        
+        if (below != null) {
+            onGround = true;
+            yVelocity = 0;
+            initYVelocity = 0;
+            timeStep = 0;
+            setLocation(getX(), below.getY() - 50);
+        } else {
+            onGround = false;
+        }
+        
         if (Greenfoot.isKeyDown("up") && onGround == true  && !holding) {
             yVelocity -= jumpSpeed;
+            initYVelocity = -jumpSpeed;
             onGround = false;
             holding = true;
             jump.play();
@@ -122,28 +138,25 @@ public class Slippy extends Character
         if (!Greenfoot.isKeyDown("up")) {
             holding = false;
         }
+       
         
         if (holding && timeStep < 15 && !onGround) {
             yVelocity -= 12;
         }
                 
         if (onGround == false) {
-            if ((int)(getY() + yVelocity) > 430) {
-                setLocation(getX(), 430);
-            } else {
-                setLocation(getX(), (int)(getY() + yVelocity));
-            }
+           
+            setLocation(getX(), (int)(getY() + yVelocity));
             
-            if (yVelocity < 18) {
-                yVelocity = (int)(-jumpSpeed) + (int)(.77*Math.pow(timeStep,1.1));
+            if (isSliding)  {   
+                yVelocity = 5;
+                initYVelocity = 0;
+                timeStep = 0;    
+            }
+            else if (yVelocity < 18 && !isSliding) {
+                yVelocity = (int)(initYVelocity) + (int)(.77*Math.pow(timeStep,1.1));
             }
             timeStep += .8;
-           //System.out.println(yVelocity);
-        }
-        
-        if (getY() >= 430) {
-            onGround = true;
-            timeStep = 0;
         }
         
         
