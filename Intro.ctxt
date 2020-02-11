@@ -4,5 +4,5 @@ comment0.text=\n\ Write\ a\ description\ of\ class\ Intro\ here.\n\ \n\ @author\
 comment1.params=
 comment1.target=Intro()
 comment2.params=
-comment2.target=act()
+comment2.target=void\ act()
 numComments=3
