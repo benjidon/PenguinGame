@@ -79,7 +79,6 @@ public class Slippy extends Character
         
         Actor left = getOneObjectAtOffset(-13, 0, Actor.class);
         Actor right = getOneObjectAtOffset(13, 0, Actor.class);
-        System.out.println(getX());
 
         if (isSliding) {
             maxXVelocity = 7;

@@ -18,13 +18,35 @@ public class Ground extends Solid
     private String fading_right[] = {"ground1_fading_right.png",
                                      "ground2_fading_right.png",
                                      "ground3_fading_right.png"};
+                                     
+    private String surface_cave[] = {"Surface_cave_ground1.png",
+                                     "Surface_cave_ground2.png",
+                                     "Surface_cave_ground3.png"
+                                    };
+                                    
+    private String subsurface_cave[] = {"Cave_ground1.png",
+                                        "Cave_ground2.png",
+                                        "Cave_ground3.png"
+                                       };
+                                    
     
     // 1 for surface, 0 for subsurface                            
     public Ground(int type) {
         super();
         Random r = new Random();
         GreenfootImage img;
-        int index = r.nextInt(3);;
+        int index = r.nextInt(3);
+        if (type == 4) {
+            img = new GreenfootImage(subsurface_cave[index]);
+            img.scale(30, 30);
+            setImage(img);
+        }
+        
+        if (type == 3) {
+            img = new GreenfootImage(surface_cave[index]);
+            img.scale(30, 30);
+            setImage(img);
+        }
         if (type == 2) {
             img = new GreenfootImage(fading_right[index]);
             img.scale(30, 30);

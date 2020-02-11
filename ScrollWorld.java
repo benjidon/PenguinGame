@@ -10,6 +10,7 @@ public class ScrollWorld extends World
 {
     private int cameraOffsetX, cameraOffsetY;
     private int worldX, worldY, worldWidth, worldHeight;
+    private int scrolledX = 0;
     private int dx = 0;
     
     static GreenfootSound music  = new GreenfootSound("overworld.mp3");
@@ -48,7 +49,7 @@ public class ScrollWorld extends World
         
         Slippy slippy = new Slippy();
         mainActor = slippy;
-        addObject(slippy, 200, 430);
+        addObject(slippy, 480, 430);
     }
     
     private void setScrollingBackground(GreenfootImage image) {
@@ -102,34 +103,46 @@ public class ScrollWorld extends World
     
     public void scrollBackground(int direction) {
         setBackground("starrynight.png");
+        
+        if (scrolledX <= 0) {
+            dx = 0;
+        }
         getBackground().drawImage(background, (dx / 50), 0);
-        getBackground().drawImage(treesBg, (dx / 2), 220);
-        getBackground().drawImage(treesBg, (dx - 2020) / 2, 220);
-        getBackground().drawImage(treesBg, (dx + 2000) / 2, 220);
+        getBackground().drawImage(treesBg, (dx / 2), 250);
+        getBackground().drawImage(treesBg, (dx - 2020) / 2, 250);
+        getBackground().drawImage(treesBg, (dx + 2000) / 2, 250);
         dx += direction;
+        
    
     }
     
     // Scroll all actors around Slippy
     private void scrollObjects() {
-        List<Actor> objects = getObjects(Actor.class);
-        int dx = 0;
-        int dy = 0;
+       List<Actor> objects = getObjects(Actor.class);
+       int dx = 0;
+       int dy = 0;
         
-        dx = mainActor.getX() - 480;
-        
-        if (dx < 0) {
-            mainActor.setLocation(480, mainActor.getY());
-        }
-        else if (dx > 0) {
-            mainActor.setLocation(480, mainActor.getY());
+       dx = mainActor.getX() - 480;
+       scrolledX += dx;
+       if (scrolledX <= 0 ) {
+           scrolledX = 0;
+       }
+         
+       if (scrolledX > 0) {
+           if (dx < 0) {
+               mainActor.setLocation(480, mainActor.getY());
+           }
+           else if (dx > 0) {
+               mainActor.setLocation(480, mainActor.getY());
+            }
         }
        
-        
-       for (Actor object : objects) {
-            if (!object.equals(mainActor)) {
-                object.setLocation(object.getX() - dx, object.getY());
-            }   
+       if (scrolledX > 0) {
+           for (Actor object : objects) {
+               if (!object.equals(mainActor)) {
+                   object.setLocation(object.getX() - dx, object.getY());
+                }   
+            }
         }
     }
     
@@ -148,30 +161,30 @@ public class ScrollWorld extends World
     private void drawGroundChunk (int xStart, int yStart, boolean surface) {
         
         for (int k = yStart; k < yStart + 800; k+= 30) { 
-           for (int i = xStart; i < xStart + 600; i+=25) {
+           for (int i = xStart; i < xStart + 600; i+=30) {
                if (surface && k == yStart) {
-                   addObject(new Ground(1), i, k);
+                   addObject(new Ground(3), i, k);
                 }
                 else {
-                    addObject(new Ground(0), i, k);
+                    addObject(new Ground(4), i, k);
                 }
             }
         }
         
     }
     
+    private void drawWall(int xStart, int yStart) {
+        for (int k = yStart; k < yStart + 900; k+= 30) {
+            addObject(new Ground(4), xStart, k);     
+        }
+    }
+    
     private void buildWorld() {
      
-    
+        drawGroundChunk(-480, 475, true);
         drawGroundChunk(120, 475, true);
         drawGroundChunk(720, 475, true);
-        
-        drawGroundChunk(400, 300, false);
-        
-       
-        
-       // for (int i = 475; i > 0; i-=25)
-       // addObject(new Ground(2), 90, i);
-        
+        drawWall(-15, 0);
+        drawWall(-15, 900);
     }
 }
