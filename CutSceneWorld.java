@@ -6,7 +6,7 @@ import java.util.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class ScrollWorld extends World
+public class CutSceneWorld extends World
 {
     private int cameraOffsetX, cameraOffsetY;
     private int worldX, worldY, worldWidth, worldHeight;
@@ -25,7 +25,7 @@ public class ScrollWorld extends World
      * Constructor for objects of class ScrollWorld.
      * 
      */
-    public ScrollWorld()
+    public CutSceneWorld()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(960, 600, 1, false);
@@ -50,9 +50,13 @@ public class ScrollWorld extends World
     }
     
     public void addActors(){
-        Slippy slippy = new Slippy();
-        mainActor = slippy;
-        addObject(slippy, 480, 430);
+        FakeSlippy fakeSlippy = new FakeSlippy();
+        Blippy blippy = new Blippy();
+        mainActor = fakeSlippy;
+        Message m = new Message(1);
+        addObject(fakeSlippy, 480, 430);
+        addObject(blippy, 530, 430);
+        addObject(m, 480, 570);
     }
     
     private void setScrollingBackground(GreenfootImage image) {
