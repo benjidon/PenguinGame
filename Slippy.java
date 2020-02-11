@@ -22,7 +22,7 @@ public class Slippy extends Character
     private float maxXVelocity = 5;
     private float initYVelocity = 0;
     private float yVelocity = 0;
-    private float jumpSpeed = 10;
+    private float jumpSpeed = 6;
     private double timeStep = 0.5;
     private boolean onGround = true;
     private boolean holding = false;
@@ -46,12 +46,10 @@ public class Slippy extends Character
         GreenfootImage image = getImage();
         image.scale(75, 75);
         setImage(image);
-        
-        
         super.act();
         updateAnimation();
-        moveHorizontally();
         moveVertically();
+        moveHorizontally();
         updateOrientation();
         
     }
@@ -138,7 +136,9 @@ public class Slippy extends Character
         
         Actor below = getOneObjectAtOffset(-5, 
         (getImage().getHeight()/2 - 2) + (int)yVelocity, Actor.class);
-        
+        Actor above = getOneObjectAtOffset(-5, 
+        -30 , Actor.class);
+       
         if (below != null) {
             onGround = true;
             yVelocity = 0;
@@ -147,6 +147,14 @@ public class Slippy extends Character
             setLocation(getX(), below.getY() - 50);
         } else {
             onGround = false;
+        }
+
+        if (above != null  && yVelocity < 0) {
+            System.out.println("HIT");
+            yVelocity = Math.abs(yVelocity) + 3;
+            initYVelocity = yVelocity;
+           setLocation(getX(), above.getY() + 40);
+            return;
         }
         
         if (Greenfoot.isKeyDown("up") && onGround == true  && !holding) {
@@ -163,8 +171,8 @@ public class Slippy extends Character
         }
        
         
-        if (holding && timeStep < 15 && !onGround) {
-            yVelocity -= 12;
+        if (holding && timeStep < 7 && !onGround) {
+            yVelocity -= 5;
         }
                 
         if (onGround == false) {
@@ -172,14 +180,14 @@ public class Slippy extends Character
             setLocation(getX(), (int)(getY() + yVelocity));
             
             if (isSliding)  {   
-                yVelocity = 5;
+                yVelocity = (int)2;
                 initYVelocity = 0;
                 timeStep = 0;    
             }
-            else if (yVelocity < 18 && !isSliding) {
-                yVelocity = (int)(initYVelocity) + (int)(.77*Math.pow(timeStep,1.1));
+            else if (yVelocity < 12 && !isSliding) {
+                yVelocity = (int)(initYVelocity) + (int)(.5*Math.pow(timeStep,1.1));
             }
-            timeStep += .8;
+            timeStep += .4;
         }
         
         

@@ -17,9 +17,6 @@ public class Intro extends World
         super(960, 600, 1);
         SplashScreen splash = new SplashScreen();
         addObject(splash, 470, 300);
-        
-        
-        
     }
     
     public void act(){

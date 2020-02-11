@@ -89,4 +89,13 @@ public class AnimatedActor extends ScrollingActor
         isMoving = false;
         delay = SLOW_DELAY;
     }
+    
+    public void setScale(int xscale, int yscale){
+        for(GreenfootImage image : movingFrames){
+            image.scale(xscale, yscale);
+        }
+        for(GreenfootImage image : idleFrames){
+            image.scale(xscale, yscale);
+        }
+    }
 }

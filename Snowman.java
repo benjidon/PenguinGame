@@ -23,6 +23,7 @@ public class Snowman extends Character
         if(direction == 1){
             this.mirrorAll();
         }
+        this.setScale(75, 75);
     }
     
     public void act() 

@@ -20,6 +20,7 @@ public class CutSceneWorld extends World
     private GreenfootImage treesBg = null;
     
     private Actor mainActor = null;
+    private Blippy blippy;
     
     /**
      * Constructor for objects of class ScrollWorld.
@@ -51,7 +52,7 @@ public class CutSceneWorld extends World
     
     public void addActors(){
         FakeSlippy fakeSlippy = new FakeSlippy();
-        Blippy blippy = new Blippy();
+        blippy = new Blippy();
         mainActor = fakeSlippy;
         Message m = new Message(1);
         addObject(fakeSlippy, 480, 430);
@@ -153,18 +154,6 @@ public class CutSceneWorld extends World
         }
     }
     
-    
-    public void act() {
-        if (Greenfoot.isKeyDown("right")) {
-            scrollBackground(-1);
-        }
-        if (Greenfoot.isKeyDown("left")) {
-            scrollBackground(1);
-        }
-        
-        scrollObjects();
-    }
-    
     private void drawGroundChunk (int xStart, int yStart, boolean surface) {
         
         for (int k = yStart; k < yStart + 800; k+= 30) { 
@@ -179,6 +168,7 @@ public class CutSceneWorld extends World
         }
         
     }
+
     
     private void drawWall(int xStart, int yStart) {
         for (int k = yStart; k < yStart + 900; k+= 30) {
@@ -193,5 +183,13 @@ public class CutSceneWorld extends World
         drawGroundChunk(720, 475, true);
         drawWall(-15, 0);
         drawWall(-15, 900);
+    }
+    
+    public void act(){
+        if(blippy.isAtEdge()){
+            removeObject(blippy);
+            Greenfoot.setWorld(new ScrollWorld());
+        }
+        
     }
 }

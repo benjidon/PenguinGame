@@ -22,8 +22,9 @@ public class Blippy extends Character
         GreenfootImage image = getImage();
         image.scale(75, 75);
         setImage(image);
-        
-        
         super.act();// Add your action code here.
+        if(getWorld() instanceof CutSceneWorld){
+            setLocation(getX() + 1, getY());
+        }
     }    
 }

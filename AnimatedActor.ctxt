@@ -16,4 +16,6 @@ comment6.params=
 comment6.target=void\ setMoving()
 comment7.params=
 comment7.target=void\ setIdle()
-numComments=8
+comment8.params=xscale\ yscale
+comment8.target=void\ setScale(int,\ int)
+numComments=9

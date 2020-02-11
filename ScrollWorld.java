@@ -46,10 +46,7 @@ public class ScrollWorld extends World
         }
         
         buildWorld();
-        addActors();
-    }
-    
-    public void addActors(){
+        
         Slippy slippy = new Slippy();
         mainActor = slippy;
         addObject(slippy, 480, 430);
@@ -163,7 +160,7 @@ public class ScrollWorld extends World
     
     private void drawGroundChunk (int xStart, int yStart, boolean surface) {
         
-        for (int k = yStart; k < yStart + 800; k+= 30) { 
+        for (int k = yStart; k < yStart + 400; k+= 30) { 
            for (int i = xStart; i < xStart + 600; i+=30) {
                if (surface && k == yStart) {
                    addObject(new Ground(3), i, k);
@@ -175,6 +172,24 @@ public class ScrollWorld extends World
         }
         
     }
+    
+    private void drawCeilingChunk (int xStart, int yStart, boolean surface) {
+        
+        for (int k = yStart; k > yStart - 400; k -= 29) { 
+           for (int i = xStart; i < xStart + 600; i+=30) {
+               if (surface && k == yStart) {
+                   Ground ceiling = new Ground(3);
+                   ceiling.setRotation(180);
+                   addObject(ceiling, i, k);
+                }
+                else {
+                    addObject(new Ground(4), i, k);
+                }
+            }
+        }
+        
+    }
+    
     
     private void drawWall(int xStart, int yStart) {
         for (int k = yStart; k < yStart + 900; k+= 30) {
@@ -189,5 +204,7 @@ public class ScrollWorld extends World
         drawGroundChunk(720, 475, true);
         drawWall(-15, 0);
         drawWall(-15, 900);
+        //drawCeilingChunk(0, 200, true);
+        //drawCeilingChunk(600, 300, true);
     }
 }
