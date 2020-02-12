@@ -113,19 +113,19 @@ public class ScrollWorld extends World
         if (scrolledX <= 0) {
             dx = 0;
         }
+        
         getBackground().drawImage(background, (dx / 50), 0);
         getBackground().drawImage(treesBg, (dx / 2), 250);
         getBackground().drawImage(treesBg, (dx - 2020) / 2, 250);
         getBackground().drawImage(treesBg, (dx + 2000) / 2, 250);
         
-        
-            getBackground().drawImage(caveBg, (dx) / 2, 0);
-            getBackground().drawImage(caveBg, (dx + 321) / 2, 96);
-            for (int i = 0; i < 1100; i += 65) {
-                for (int k = 0; k < 960; k += 96) {
-                    getBackground().drawImage(caveBg, (-1*scrolledX + i), k);
-                }
+    
+    
+        for (int i = 0; i < 2000; i += 65) {
+            for (int k = 0; k < 400; k += 96) {
+                getBackground().drawImage(caveBg, (-1*scrolledX + i), k);
             }
+        }
         
         dx += direction;
     }
