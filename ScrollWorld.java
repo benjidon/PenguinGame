@@ -22,6 +22,7 @@ public class ScrollWorld extends World
     Message m = new Message(1);
     private Slippy mainActor = null;
     private Blippy blippy;
+    private PartsCollectedMessage partsCollected = null;
     
     /**
      * Constructor for objects of class ScrollWorld.
@@ -156,11 +157,11 @@ public class ScrollWorld extends World
        if (scrolledX > 0) {
            for (Actor object : objects) {
                if(object != null){
-                   if (!object.equals(mainActor)) {
+                   if (!object.equals(mainActor) && !(object instanceof PartsCollectedMessage)) {
                        object.setLocation(object.getX() - dx, object.getY());
                    }
                }
-            }
+           }
         }
     }
     
@@ -174,8 +175,8 @@ public class ScrollWorld extends World
                 removeObject(m);
                 m = null;
                 mainActor.unfreeze();
-                PartsCollectedMessage partsMessage = new PartsCollectedMessage();
-                this.addObject(partsMessage, 730, 20);
+                partsCollected = new PartsCollectedMessage();
+                this.addObject(partsCollected, 730, 20);
             }
         }
         scrollObjects();
