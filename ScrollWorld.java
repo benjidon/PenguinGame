@@ -174,6 +174,8 @@ public class ScrollWorld extends World
                 removeObject(m);
                 m = null;
                 mainActor.unfreeze();
+                PartsCollectedMessage partsMessage = new PartsCollectedMessage();
+                this.addObject(partsMessage, 730, 20);
             }
         }
         scrollObjects();
