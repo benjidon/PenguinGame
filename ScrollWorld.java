@@ -167,7 +167,7 @@ public class ScrollWorld extends World
     
     public void act() {
         if(blippy != null){
-            mainActor.freeze(new GreenfootImage("slippyAngry.png"));
+            mainActor.freeze();
             if(blippy.isAtEdge()){
                 removeObject(blippy);
                 blippy = null;
