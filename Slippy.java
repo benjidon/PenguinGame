@@ -62,6 +62,7 @@ public class Slippy extends Character
         } else if(!onGround){
             this.disableAnimation();
             setImage(slippyUp);
+            isSliding = false;
         } else {
             this.enableAnimation();
             isSliding = false;
@@ -150,7 +151,6 @@ public class Slippy extends Character
         }
 
         if (above != null  && yVelocity < 0) {
-            System.out.println("HIT");
             yVelocity = Math.abs(yVelocity) + 3;
             initYVelocity = yVelocity;
            setLocation(getX(), above.getY() + 40);
@@ -181,7 +181,7 @@ public class Slippy extends Character
             
             if (isSliding)  {   
                 yVelocity = (int)2;
-                initYVelocity = 0;
+                initYVelocity = 2;
                 timeStep = 0;    
             }
             else if (yVelocity < 12 && !isSliding) {
