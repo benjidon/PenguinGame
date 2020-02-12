@@ -18,8 +18,10 @@ public class ScrollWorld extends World
         
     private GreenfootImage background = null;
     private GreenfootImage treesBg = null;
-    
-    private Actor mainActor = null;
+    private GreenfootImage caveBg = null;
+    Message m = new Message(1);
+    private Slippy mainActor = null;
+    private Blippy blippy;
     
     /**
      * Constructor for objects of class ScrollWorld.
@@ -35,6 +37,7 @@ public class ScrollWorld extends World
         // Initialize Background Images
         GreenfootImage snowBg = new GreenfootImage("Background_101.png");
         treesBg = new GreenfootImage("Background_38.png");
+        caveBg = new GreenfootImage("Background_165.png");
         setScrollingBackground(snowBg);
         
         // Start Music Loop
@@ -48,8 +51,11 @@ public class ScrollWorld extends World
         buildWorld();
         
         Slippy slippy = new Slippy();
+        blippy = new Blippy();
         mainActor = slippy;
         addObject(slippy, 480, 430);
+        addObject(blippy, 530, 430);
+        addObject(m, 480, 570);
     }
     
     private void setScrollingBackground(GreenfootImage image) {
@@ -111,9 +117,17 @@ public class ScrollWorld extends World
         getBackground().drawImage(treesBg, (dx / 2), 250);
         getBackground().drawImage(treesBg, (dx - 2020) / 2, 250);
         getBackground().drawImage(treesBg, (dx + 2000) / 2, 250);
-        dx += direction;
         
-   
+        
+            getBackground().drawImage(caveBg, (dx) / 2, 0);
+            getBackground().drawImage(caveBg, (dx + 321) / 2, 96);
+            for (int i = 0; i < 1100; i += 65) {
+                for (int k = 0; k < 960; k += 96) {
+                    getBackground().drawImage(caveBg, (-1*scrolledX + i), k);
+                }
+            }
+        
+        dx += direction;
     }
     
     // Scroll all actors around Slippy
@@ -131,30 +145,37 @@ public class ScrollWorld extends World
        if (scrolledX > 0) {
            if (dx < 0) {
                mainActor.setLocation(480, mainActor.getY());
+               scrollBackground(1);
            }
            else if (dx > 0) {
                mainActor.setLocation(480, mainActor.getY());
+               scrollBackground(-1);
             }
         }
        
        if (scrolledX > 0) {
            for (Actor object : objects) {
-               if (!object.equals(mainActor)) {
-                   object.setLocation(object.getX() - dx, object.getY());
-                }   
+               if(object != null){
+                   if (!object.equals(mainActor)) {
+                       object.setLocation(object.getX() - dx, object.getY());
+                   }
+               }
             }
         }
     }
     
     
     public void act() {
-        if (Greenfoot.isKeyDown("right")) {
-            scrollBackground(-1);
+        if(blippy != null){
+            mainActor.freeze(new GreenfootImage("slippyAngry.png"));
+            if(blippy.isAtEdge()){
+                removeObject(blippy);
+                blippy = null;
+                removeObject(m);
+                m = null;
+                mainActor.unfreeze();
+            }
         }
-        if (Greenfoot.isKeyDown("left")) {
-            scrollBackground(1);
-        }
-        
         scrollObjects();
     }
     
@@ -202,9 +223,10 @@ public class ScrollWorld extends World
         drawGroundChunk(-480, 475, true);
         drawGroundChunk(120, 475, true);
         drawGroundChunk(720, 475, true);
+        drawGroundChunk(1320, 475, true);
         drawWall(-15, 0);
         drawWall(-15, 900);
-        //drawCeilingChunk(0, 200, true);
-        //drawCeilingChunk(600, 300, true);
+        drawCeilingChunk(0, 200, true);
+        drawCeilingChunk(600, 300, true);
     }
 }

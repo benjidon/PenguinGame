@@ -23,8 +23,6 @@ public class Blippy extends Character
         image.scale(75, 75);
         setImage(image);
         super.act();// Add your action code here.
-        if(getWorld() instanceof CutSceneWorld){
-            setLocation(getX() + 1, getY());
-        }
+        setLocation(getX() + 1, getY());
     }    
 }
