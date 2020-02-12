@@ -35,6 +35,13 @@ public class FlightSlippy extends Character
             || (Greenfoot.isKeyDown("right") && !facingForwards)){
             reverseOrientation();
         }
+        if(Greenfoot.isKeyDown("right")){
+            setRotation(10);
+        } else if(Greenfoot.isKeyDown("left")){
+            setRotation(-10);
+        } else {
+            setRotation(0);
+        }
     }
     
     public void reverseOrientation(){
