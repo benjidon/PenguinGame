@@ -15,7 +15,7 @@ public class FakeSlippy extends Actor
     GreenfootImage image;
     public void act() 
     {
-        image = new GreenfootImage("fake_slippy.png");
+        image = new GreenfootImage("slippyAngry.png");
         image.scale(75, 75);
         this.setImage(image);
         

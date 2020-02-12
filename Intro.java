@@ -8,7 +8,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Intro extends World
 {
-    static GreenfootSound menuMusic  = new GreenfootSound("menu.mp3");
     private boolean playing = false;
     
     public Intro()
@@ -20,11 +19,5 @@ public class Intro extends World
     }
     
     public void act(){
-        if(!menuMusic.isPlaying() && playing == false)
-        {
-            menuMusic.playLoop();
-            playing = true;
-            menuMusic.setVolume(65);
-        }
     }
 }

@@ -32,7 +32,6 @@ public class SplashScreen extends Actor
         if (Greenfoot.mouseClicked(this)) {
             if(currentSlide == slides.length - 1){
                 Intro currentWorld = (Intro)(getWorld());
-                currentWorld.menuMusic.stop();
                 Greenfoot.setWorld(new CutSceneWorld());
                 return;
             }

@@ -26,6 +26,7 @@ public class Slippy extends Character
     private double timeStep = 0.5;
     private boolean onGround = true;
     private boolean holding = false;
+    private boolean frozen = false;
     
     static GreenfootSound jump  = new GreenfootSound("jump.wav");
 
@@ -47,6 +48,9 @@ public class Slippy extends Character
         image.scale(75, 75);
         setImage(image);
         super.act();
+        if(frozen){
+            return;
+        }
         updateAnimation();
         moveVertically();
         moveHorizontally();
@@ -205,5 +209,16 @@ public class Slippy extends Character
         mirrorAll();
         slippyDown.mirrorHorizontally();
         slippyUp.mirrorHorizontally();
+    }
+    
+    public void freeze(GreenfootImage image){
+        disableAnimation();
+        this.setImage(image);
+        frozen = true;
+    }
+    
+    public void unfreeze(){
+        enableAnimation();
+        frozen = false;
     }
 }
