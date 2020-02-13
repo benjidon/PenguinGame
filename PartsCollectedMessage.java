@@ -17,7 +17,7 @@ public class PartsCollectedMessage extends Actor
     private int currentPart = 0;
     
     public PartsCollectedMessage(){
-        images = new GreenfootImage[parts + 1];
+        images = new GreenfootImage[parts + 2];
         for(int i = 0; i <= parts; ++i){
             images[i] = new GreenfootImage("parts_collected" + i + ".png");
         }

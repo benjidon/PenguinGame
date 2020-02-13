@@ -242,12 +242,8 @@ public class ScrollWorld extends World
         if(gameOver){
             Slippy s = (Slippy)mainActor;
             s.freeze(new GreenfootImage("flight_slippy1.png"));
-            if(!s.isAtEdge()){
-                s.setLocation(s.getX(), s.getY() - 5);
-            } else {
-                SplashScreen splash = new SplashScreen();
-                addObject(splash, 470, 300);
-            }
+            partsCollected.advance();
+            Greenfoot.stop();
         }
 
     }

@@ -33,5 +33,12 @@ public class Wolf extends Character
         }
         counter++;
         setLocation(getX() + direction * 5, getY());
+        
+        Actor a = getOneIntersectingObject(Slippy.class);  
+      
+        if(a != null)  
+        {  
+            //TODO
+        } 
     }    
 }
