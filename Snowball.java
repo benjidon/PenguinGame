@@ -18,5 +18,15 @@ public class Snowball extends Projectile
     public void act() 
     {
        super.act();
+       try{
+           Actor a = getOneIntersectingObject(Slippy.class);  
+          
+            if(a != null)  
+            {  
+                ((Slippy)a).kill();
+            }
+        } catch (IllegalStateException e){
+            return;
+        }
     }    
 }

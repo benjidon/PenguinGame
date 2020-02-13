@@ -34,11 +34,15 @@ public class Wolf extends Character
         counter++;
         setLocation(getX() + direction * 5, getY());
         
-        Actor a = getOneIntersectingObject(Slippy.class);  
-      
-        if(a != null)  
-        {  
-            //TODO
+        try{
+           Actor a = getOneIntersectingObject(Slippy.class);  
+          
+            if(a != null)  
+            {  
+                ((Slippy)a).kill();
+            }
+        } catch (IllegalStateException e){
+            return;
         } 
     }    
 }

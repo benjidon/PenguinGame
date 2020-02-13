@@ -56,6 +56,10 @@ public class Slippy extends Character
         moveVertically();
         moveHorizontally();
         updateOrientation();
+        // Kill him if he falls out of the world
+        if(getY() >= getWorld().getHeight() - 1){
+            kill();
+        }
         
     }
     
@@ -222,5 +226,10 @@ public class Slippy extends Character
     public void unfreeze(){
         enableAnimation();
         frozen = false;
+    }
+    
+    public void kill(){
+        ScrollWorld restartedWorld = new ScrollWorld();
+        Greenfoot.setWorld(restartedWorld);
     }
 }
