@@ -14,14 +14,14 @@ public class PartsCollectedMessage extends Actor
      */
     public static final int parts = 4;
     private GreenfootImage images[];
-    int currentImage = 0;
+    private int currentPart = 0;
     
     public PartsCollectedMessage(){
         images = new GreenfootImage[parts + 1];
         for(int i = 0; i <= parts; ++i){
             images[i] = new GreenfootImage("parts_collected" + i + ".png");
         }
-        this.setImage(images[currentImage]);
+        this.setImage(images[currentPart]);
     }
     
     public void act() 
@@ -30,6 +30,10 @@ public class PartsCollectedMessage extends Actor
     }
     
     public void advance(){
-        this.setImage(images[++currentImage]);
+        this.setImage(images[++currentPart]);
+    }
+    
+    public int getCurrentPart(){
+        return currentPart;
     }
 }

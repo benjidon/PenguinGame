@@ -19,10 +19,12 @@ public class ScrollWorld extends World
     private GreenfootImage background = null;
     private GreenfootImage treesBg = null;
     private GreenfootImage caveBg = null;
-    Message m = new Message(1);
-    private Slippy mainActor = null;
+    private Message m = new Message(1);
+    private Actor mainActor = null;
     private Blippy blippy;
     private PartsCollectedMessage partsCollected = null;
+    
+    private boolean gameOver = false;
     
     /**
      * Constructor for objects of class ScrollWorld.
@@ -100,6 +102,10 @@ public class ScrollWorld extends World
         return worldHeight;
     }
     
+    public PartsCollectedMessage getPartsCollected(){
+        return partsCollected;
+    }
+    
     public void setWorldDimensions(int x, int y, int width, int height)
     {
         worldX = x;
@@ -168,18 +174,26 @@ public class ScrollWorld extends World
     
     public void act() {
         if(blippy != null){
-            mainActor.freeze();
+            Slippy s = (Slippy)mainActor;
+            s.freeze(new GreenfootImage("slippyAngry.png"));
             if(blippy.isAtEdge()){
                 removeObject(blippy);
                 blippy = null;
                 removeObject(m);
                 m = null;
-                mainActor.unfreeze();
+                s.unfreeze();
                 partsCollected = new PartsCollectedMessage();
                 this.addObject(partsCollected, 730, 20);
             }
         }
         scrollObjects();
+        if(gameOver){
+            Slippy s = (Slippy)mainActor;
+            s.freeze(new GreenfootImage("flight_slippy1.png"));
+            while(!s.isAtEdge()){
+                s.setLocation(getLocation(getX(), getY() - 5));
+            }
+        }
     }
     
     private void drawGroundChunk (int xStart, int yStart, boolean surface) {
@@ -231,5 +245,17 @@ public class ScrollWorld extends World
         drawWall(-15, 900);
         drawCeilingChunk(0, 200, true);
         drawCeilingChunk(600, 300, true);
+    }
+    
+    public Actor getMainActor(){
+        return mainActor;
+    }
+    
+    public void setMainActor(Actor newActor){
+        mainActor = newActor;
+    }
+    
+    public void setGameOver(){
+        gameOver = true;
     }
 }

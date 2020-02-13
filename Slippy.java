@@ -10,7 +10,6 @@ public class Slippy extends Character
 {
     private GreenfootImage slippyDown = new GreenfootImage("slippyDown.png");
     private GreenfootImage slippyUp = new GreenfootImage("slippyUp.png");
-    private GreenfootImage slippyAngry = new GreenfootImage("slippyAngry.png");
     private GreenfootImage slippyHappy = new GreenfootImage("slippyHappy.png");
     private boolean isSliding = false;
     private boolean facingForwards = true;
@@ -213,9 +212,9 @@ public class Slippy extends Character
         slippyUp.mirrorHorizontally();
     }
     
-    public void freeze(){
+    public void freeze(GreenfootImage image){
         disableAnimation();
-        this.setImage(slippyAngry);
+        this.setImage(image);
         frozen = true;
     }
     
