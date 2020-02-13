@@ -243,7 +243,7 @@ public class ScrollWorld extends World
             Slippy s = (Slippy)mainActor;
             s.freeze(new GreenfootImage("flight_slippy1.png"));
             partsCollected.advance();
-            Greenfoot.stop();
+            Greenfoot.setWorld(new GameWonWorld());
         }
 
     }

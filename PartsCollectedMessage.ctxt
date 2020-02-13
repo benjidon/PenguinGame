@@ -9,4 +9,6 @@ comment3.params=
 comment3.target=void\ advance()
 comment4.params=
 comment4.target=int\ getCurrentPart()
-numComments=5
+comment5.params=partsCollected
+comment5.target=void\ setPartsCollected(int)
+numComments=6

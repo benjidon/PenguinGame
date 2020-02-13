@@ -25,9 +25,9 @@ public class FlightSlippy extends Character
     public void act() 
     {
         super.act();
-        //moveVertically();
-        //moveHorizontally();
-        //updateOrientation();
+        moveVertically();
+        moveHorizontally();
+        updateOrientation();
     }
     
     public void updateOrientation(){
