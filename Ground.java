@@ -36,6 +36,12 @@ public class Ground extends Solid
         Random r = new Random();
         GreenfootImage img;
         int index = r.nextInt(3);
+        if (type == 5) {
+            img = new GreenfootImage(surface_images[index]);
+            img.scale(15, 15);
+            setImage(img);
+            
+        }
         if (type == 4) {
             img = new GreenfootImage(subsurface_cave[index]);
             img.scale(30, 30);
