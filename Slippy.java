@@ -87,7 +87,8 @@ public class Slippy extends Character
         if (isSliding) {
             maxXVelocity = 7;
         } else {
-            maxXVelocity = 5;
+            maxXVelocity = 20;
+            //maxXVelocity = 5;
         }
         
         if (Greenfoot.isKeyDown("right"))

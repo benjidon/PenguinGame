@@ -1,8 +1,6 @@
 #Greenfoot project file
 class.Background.image=Background_trees\ .png
-class.FlightSlippy.image=flight_slippy0.png
 class.ScrollWorld.image=Background_101.png
-class.Wolf.image=wolf0.png
 dependency1.from=Intro
 dependency1.to=SplashScreen
 dependency1.type=UsesDependency
@@ -34,10 +32,17 @@ dependency9.from=SplashScreen
 dependency9.to=ScrollWorld
 dependency9.type=UsesDependency
 editor.fx.0.height=722
+<<<<<<< HEAD
 editor.fx.0.width=800
 editor.fx.0.x=280
 editor.fx.0.y=112
 height=754
+=======
+editor.fx.0.width=964
+editor.fx.0.x=476
+editor.fx.0.y=64
+height=762
+>>>>>>> 2c0740f8bcb5b4bf3c924ee8718bd05d07a7bc04
 package.numDependencies=10
 package.numTargets=18
 project.charset=UTF-8
@@ -72,7 +77,11 @@ target11.height=50
 target11.name=FlightSlippy
 target11.showInterface=false
 target11.type=ClassTarget
+<<<<<<< HEAD
 target11.width=100
+=======
+target11.width=90
+>>>>>>> 2c0740f8bcb5b4bf3c924ee8718bd05d07a7bc04
 target11.x=0
 target11.y=0
 target12.height=50
@@ -156,7 +165,11 @@ target6.height=50
 target6.name=PartsCollectedMessage
 target6.showInterface=false
 target6.type=ClassTarget
+<<<<<<< HEAD
 target6.width=170
+=======
+target6.width=150
+>>>>>>> 2c0740f8bcb5b4bf3c924ee8718bd05d07a7bc04
 target6.x=0
 target6.y=0
 target7.height=50
@@ -181,7 +194,14 @@ target9.width=80
 target9.x=0
 target9.y=0
 version=3.0.0
+<<<<<<< HEAD
 width=1239
 world.lastInstantiated=ScrollWorld
 xPosition=90
 yPosition=30
+=======
+width=1230
+world.lastInstantiated=ScrollWorld
+xPosition=82
+yPosition=25
+>>>>>>> 2c0740f8bcb5b4bf3c924ee8718bd05d07a7bc04
