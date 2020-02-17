@@ -16,6 +16,14 @@ public class Slippy extends Character
     
     private static final int SCROLL_WIDTH = 160;
     private static final float JUMP = 8.0f, WALK = 4.0f;
+    
+    // Actors directly around Slippy
+    private Actor right_low;
+    private Actor right_high;
+    private Actor left_low;
+    private Actor left_high;
+    private Actor above;
+    private Actor below;
 
     private int absoluteScroll, initialXPosition, initialYPosition;
     // Vars to control movement
@@ -64,15 +72,16 @@ public class Slippy extends Character
     }
     
     private void updateAnimation(){
-        if(Greenfoot.isKeyDown("down")){
+        if(Greenfoot.isKeyDown("down") || (isSliding && above != null)){
             this.disableAnimation();
             isSliding = true;
             setImage(slippyDown);
-        } else if(!onGround){
+        }/* else if(!onGround){
             this.disableAnimation();
             setImage(slippyUp);
             isSliding = false;
-        } else {
+        } */
+        else {
             this.enableAnimation();
             isSliding = false;
             if(!Greenfoot.isKeyDown("left") && !Greenfoot.isKeyDown("right")){
@@ -85,13 +94,19 @@ public class Slippy extends Character
     
     private void moveHorizontally() {
         
-        Actor left = getOneObjectAtOffset(-13, 0, Actor.class);
-        Actor right = getOneObjectAtOffset(13, 0, Actor.class);
+        left_low = getOneObjectAtOffset(-13, 30, Actor.class);
+        left_high = getOneObjectAtOffset(-13, -18, Actor.class);
+   
+        right_low = getOneObjectAtOffset(13, 30, Actor.class);
+        right_high = getOneObjectAtOffset(13, -18, Actor.class);
+
 
         if (isSliding) {
             maxXVelocity = 7;
+            right_high = getOneObjectAtOffset(13, 10, Actor.class);
+            left_high = getOneObjectAtOffset(-13, 10, Actor.class);
+
         } else {
-            //maxXVelocity = 20;
             maxXVelocity = 5;
         }
         
@@ -108,7 +123,11 @@ public class Slippy extends Character
             if (xVelocity > maxXVelocity && !isSliding) {
                 xVelocity = maxXVelocity;
             }
-            if (right != null) {
+            
+            if (right_low != null && right_high == null) {
+                setLocation(getX(), getY() - 10);
+            }
+            else if (right_low != null || right_high != null) {
                 xVelocity = 0;
             }
             
@@ -127,7 +146,11 @@ public class Slippy extends Character
             if (xVelocity > -maxXVelocity && !isSliding) {
                 xVelocity = -maxXVelocity;
             }
-            if (left != null) {
+        
+            if (left_low != null && left_high == null) {
+                setLocation(getX(), getY() - 10);
+            }
+            else if (left_low != null || left_high != null) {
                 xVelocity = 0;
             }
             
@@ -145,17 +168,24 @@ public class Slippy extends Character
     
     private void moveVertically() {
         
-        Actor below = getOneObjectAtOffset(-5, 
+        below = getOneObjectAtOffset(-5, 
         (getImage().getHeight()/2 - 2) + (int)yVelocity, Actor.class);
-        Actor above = getOneObjectAtOffset(-5, 
-        -30 , Actor.class);
-       
+        above = getOneObjectAtOffset(0, -30 , Actor.class);
+        
+        if (isSliding) {
+            above = getOneObjectAtOffset(0, -2 , Actor.class);
+        } else {
+            above = getOneObjectAtOffset(0, -30 , Actor.class);
+        }
+        
         if (below != null) {
             onGround = true;
             yVelocity = 0;
             initYVelocity = 0;
             timeStep = 0;
-            setLocation(getX(), below.getY() - 50);
+            /*Got rid of this functinality -- keeping in case switch back*/
+            //setLocation(getX(), below.getY());
+            onGround = true;
         } else {
             onGround = false;
         }
@@ -163,7 +193,7 @@ public class Slippy extends Character
         if (above != null  && yVelocity < 0) {
             yVelocity = Math.abs(yVelocity) + 3;
             initYVelocity = yVelocity;
-           setLocation(getX(), above.getY() + 40);
+            //setLocation(getX(), above.getY() + 40);
             return;
         }
         
@@ -181,10 +211,10 @@ public class Slippy extends Character
         }
        
         
-        if (holding && timeStep < 7 && !onGround) {
+        if (holding && timeStep < 7 && !onGround && above == null) {
             yVelocity -= 5;
         }
-                
+            
         if (onGround == false) {
            
             setLocation(getX(), (int)(getY() + yVelocity));
@@ -232,4 +262,17 @@ public class Slippy extends Character
         ScrollWorld restartedWorld = new ScrollWorld();
         Greenfoot.setWorld(restartedWorld);
     }
+    
+    public Actor getRightLow() {
+        return right_low;
+    } 
+    public Actor getRightHigh() {
+        return right_high;
+    }
+    public Actor getLeftLow() {
+        return left_low;
+    } 
+    public Actor getLeftHigh() {
+        return left_high;
+    }   
 }
