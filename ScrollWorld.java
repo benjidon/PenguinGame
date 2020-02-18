@@ -72,8 +72,8 @@ public class ScrollWorld extends World
         addObject(m, 480, 570);
         addObject(new Part(0), 2500, 480);
         addObject(new Part(1), 6000, 420);
-        addObject(new Part(2), 6500, -350);
-        addObject(new Part(3), 3000, -560);
+        addObject(new Part(2), 7750, -370);
+        addObject(new Part(3), 2000, -500);
         addObject(new Snowman(-1), 3680, 430);
         addObject(new Wolf(), 3100, -390);
         addObject(new Ted(), 6000, -285);
@@ -342,6 +342,9 @@ public class ScrollWorld extends World
         addObject(new Ground(1, 900, 600), 5200, 100);
         addObject(new Ground(1, 900, 500), 6100, 0);
         addObject(new Ground(1, 500, 950), 6380, 130);
+        
+        // Next part of big mountain
+        addObject(new Ground(1, 500, 950), 7600, 130);
         
         
         // Platforms

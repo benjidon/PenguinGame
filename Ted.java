@@ -26,7 +26,7 @@ public class Ted extends Character
         super.act();
         ScrollWorld world = (ScrollWorld)getWorld();
         Slippy s = (Slippy)(world.getMainActor());
-        if(Math.abs(getX() - s.getX()) < 350 && !hasSpoken){
+        if(Math.abs(getX() - s.getX()) < 350 && !hasSpoken && Math.abs(getY() - s.getY()) < 20){
             s.freeze(new GreenfootImage("slippyHappy.png"));
             world.addObject(m, 480, 570);
             m.getImage().scale(900, 125);
