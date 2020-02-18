@@ -14,10 +14,13 @@ public class HealthBar extends Actor
      */
     public static final int healthPoints = 4;
     private GreenfootImage images[];
+    private GreenfootSound hit;
     private int damage = 0;
     
     public HealthBar(){
         images = new GreenfootImage[healthPoints];
+        hit = new GreenfootSound("hit.wav");
+        hit.setVolume(75);
         for(int i = 0; i < healthPoints; ++i){
             images[i] = new GreenfootImage("health" + i + ".png");
             images[i].scale(270, 70);
@@ -26,11 +29,12 @@ public class HealthBar extends Actor
     }
     
     public void act() 
-    {
+    {   
         this.setImage(images[damage]);
     }
     
     public void detractHealth(){
+        hit.play();
         this.setImage(images[++damage]);
     }
     

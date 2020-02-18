@@ -14,9 +14,12 @@ public class Part extends Actor
      */
     private GreenfootImage image;
     private ScrollWorld world;
+    private GreenfootSound pickup;
     
     public Part(int number){
         image = new GreenfootImage("plane" + number + ".png");
+        pickup = new GreenfootSound("pickup.wav");
+        pickup.setVolume(70);
         this.setImage(image);
         
     }
@@ -26,7 +29,8 @@ public class Part extends Actor
         Actor b = getOneIntersectingObject(Slippy.class);  
       
         if(b != null)  
-        {  
+        {   
+            pickup.play();
             world = (ScrollWorld)(getWorld());
             world.getPartsCollected().advance();  
             world.removeObject(this);

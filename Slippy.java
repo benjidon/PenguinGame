@@ -36,6 +36,7 @@ public class Slippy extends Character
     private boolean onGround = true;
     private boolean holding = false;
     private boolean frozen = false;
+    private boolean falling = false;
     
     static GreenfootSound jump  = new GreenfootSound("jump.wav");
 
@@ -60,15 +61,15 @@ public class Slippy extends Character
             moveVertically();
             return;
         }
-        updateAnimation();
+        
         moveVertically();
         moveHorizontally();
         updateOrientation();
+        updateAnimation();
         // Kill him if he falls out of the world
         if(getY() >= getWorld().getHeight() - 1){
             kill();
-        }
-        
+        }        
     }
     
     private void updateAnimation(){
@@ -76,11 +77,11 @@ public class Slippy extends Character
             this.disableAnimation();
             isSliding = true;
             setImage(slippyDown);
-        }/* else if(!onGround){
+        } else if((!onGround && Math.abs(yVelocity) > 2) || falling){
             this.disableAnimation();
             setImage(slippyUp);
             isSliding = false;
-        } */
+        } 
         else {
             this.enableAnimation();
             isSliding = false;
@@ -172,6 +173,7 @@ public class Slippy extends Character
         (getImage().getHeight()/2 - 2) + (int)yVelocity, Actor.class);
         above = getOneObjectAtOffset(0, -30 , Actor.class);
         
+        
         if (isSliding) {
             above = getOneObjectAtOffset(0, -2 , Actor.class);
         } else {
@@ -183,8 +185,7 @@ public class Slippy extends Character
             yVelocity = 0;
             initYVelocity = 0;
             timeStep = 0;
-            /*Got rid of this functinality -- keeping in case switch back*/
-            //setLocation(getX(), below.getY());
+            falling = false;
             onGround = true;
         } else {
             onGround = false;
@@ -193,11 +194,11 @@ public class Slippy extends Character
         if (above != null  && yVelocity < 0) {
             yVelocity = Math.abs(yVelocity) + 3;
             initYVelocity = yVelocity;
-            //setLocation(getX(), above.getY() + 40);
             return;
         }
         
         if (Greenfoot.isKeyDown("up") && onGround == true  && !holding) {
+            falling = true;
             yVelocity -= jumpSpeed;
             initYVelocity = -jumpSpeed;
             onGround = false;
@@ -216,10 +217,13 @@ public class Slippy extends Character
         }
             
         if (onGround == false) {
-           
-            setLocation(getX(), (int)(getY() + yVelocity));
-            
-            if (isSliding)  {   
+            if (Greenfoot.isKeyDown("up") && Greenfoot.isKeyDown("down")) {
+                setLocation(getX(), (int)(getY() + 2));
+            }
+            else {
+                setLocation(getX(), (int)(getY() + yVelocity));
+            }
+            if (isSliding)  { 
                 yVelocity = (int)2;
                 initYVelocity = 2;
                 timeStep = 0;    
