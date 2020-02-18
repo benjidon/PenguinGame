@@ -78,6 +78,8 @@ public class ScrollWorld extends World
         addObject(new Wolf(), 3100, -390);
         addObject(new Ted(), 6000, -285);
         addObject(new Snowman(1), 3300, -300);
+        addObject(new Janet(), 2700, 480);
+        addObject(new Terry(), 6075, 420);
 ;
         
     }
