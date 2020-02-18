@@ -72,10 +72,12 @@ public class ScrollWorld extends World
         addObject(m, 480, 570);
         addObject(new Part(0), 2500, 480);
         addObject(new Part(1), 6000, 420);
-        addObject(new Part(2), 6000, -260);
-        addObject(new Part(3), 3000, -500);
+        addObject(new Part(2), 6500, -350);
+        addObject(new Part(3), 3000, -560);
         addObject(new Snowman(-1), 3680, 430);
         addObject(new Wolf(), 3100, -390);
+        addObject(new Ted(), 6000, -285);
+;
         
     }
     

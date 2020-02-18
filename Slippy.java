@@ -48,8 +48,7 @@ public class Slippy extends Character
         super("slippy", 8, 11);
         absoluteScroll = 0;
         jump.setVolume(87);
-    }
-    
+    }   
     
     public void act() 
     {
@@ -58,6 +57,7 @@ public class Slippy extends Character
         setImage(image);
         super.act();
         if(frozen){
+            moveVertically();
             return;
         }
         updateAnimation();
