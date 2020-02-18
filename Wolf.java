@@ -39,7 +39,10 @@ public class Wolf extends Character
           
             if(a != null)  
             {  
-                ((Slippy)a).kill();
+                Slippy slippy = (Slippy)a;
+                slippy.damage();
+                slippy.setLocation(slippy.getX() + 100, slippy.getY());
+                
             }
         } catch (IllegalStateException e){
             return;

@@ -1,3 +1,4 @@
+
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 /**
@@ -24,6 +25,7 @@ public class ScrollWorld extends World
     private Actor mainActor = null;
     private Blippy blippy;
     private PartsCollectedMessage partsCollected = null;
+    private HealthBar healthBar = null;
     
     private boolean gameOver = false;
     
@@ -41,8 +43,16 @@ public class ScrollWorld extends World
         // Initialize Background Images
         GreenfootImage snowBg = new GreenfootImage("Background_101.png");
         treesBg = new GreenfootImage("Background_38.png");
-        caveBg = new GreenfootImage("Background_165.png");
+        GreenfootImage caveBackground = new GreenfootImage(3000, 900);
+        for (int y = 0; y < 400; y += 95) {
+                for (int x = 0; x < 1000; x += 96) {
+                    GreenfootImage draw = new GreenfootImage("Background_165.png");
+                    caveBackground.drawImage(draw, x, y);
+                }
+        }
+        caveBg = caveBackground;
         setScrollingBackground(snowBg);
+        
         
         // Start Music Loop
         if(!music.isPlaying() && playing == false)
@@ -65,7 +75,7 @@ public class ScrollWorld extends World
         addObject(new Part(2), 6000, -260);
         addObject(new Part(3), 3000, -500);
         addObject(new Snowman(-1), 3680, 430);
-        addObject(new Wolf(), 3500, -450);
+        addObject(new Wolf(), 3100, -390);
         
     }
     
@@ -114,6 +124,10 @@ public class ScrollWorld extends World
         return partsCollected;
     }
     
+    public HealthBar getHealthBar(){
+        return healthBar;
+    }
+    
     public void setWorldDimensions(int x, int y, int width, int height)
     {
         worldX = x;
@@ -133,23 +147,8 @@ public class ScrollWorld extends World
         getBackground().drawImage(treesBg, (dx / 2), 280);
         getBackground().drawImage(treesBg, (dx - 2020) / 2, 280);
         getBackground().drawImage(treesBg, (dx + 2000) / 2, 280);
-    
-        //for (int i = 0; i < 1000; i += 65) {
-        //   for (int k = 0; k < 400; k += 96) {
-        //        getBackground().drawImage(caveBg, (-1*scrolledX + i), (-1*scrolledY + k));
-        //    }
-        //}
-        GreenfootImage cave = caveBg;
-        //cave.scale(2000, 600);
+        //getBackground().drawImage(caveBg, dx, 90 - (scrolledY / 2));
         
-        //getBackground().drawImage(cave, (-1*scrolledX + 0), (-1*scrolledY + 0));
-
-        //getBackground().drawImage(caveBg, (-1*scrolledX + 1200), (-1*scrolledY + 480));
-        //getBackground().drawImage(caveBg, (-1*scrolledX + 1200), (-1*scrolledY + 550));
-        //getBackground().drawImage(caveBg, (-1*scrolledX + 1300), (-1*scrolledY + 480));
-        //getBackground().drawImage(caveBg, (-1*scrolledX + 1300), (-1*scrolledY + 550));
-        
-
         dx += direction;
     }
     
@@ -187,7 +186,7 @@ public class ScrollWorld extends World
        if (scrolledX > 0) {
            for (Actor object : objects) {
                if(object != null){
-                   if (!object.equals(mainActor) && !(object instanceof PartsCollectedMessage)) {
+                   if (!object.equals(mainActor) && !(object instanceof PartsCollectedMessage) &&!(object instanceof HealthBar)) {
                        object.setLocation(object.getX() - dx, object.getY());
                    }
                   
@@ -207,7 +206,7 @@ public class ScrollWorld extends World
             }
             
            for (Actor object : objects) {
-              if(object != null && !(object instanceof PartsCollectedMessage) &&!gameOver){
+              if(object != null && !(object instanceof PartsCollectedMessage) &&!gameOver &&!(object instanceof HealthBar)){
                    if (!object.equals(mainActor) ) {        
                        object.setLocation(object.getX(), object.getY() - dy);
                    }
@@ -235,6 +234,8 @@ public class ScrollWorld extends World
                 s.unfreeze();
                 partsCollected = new PartsCollectedMessage();
                 this.addObject(partsCollected, 730, 20);
+                healthBar = new HealthBar();
+                this.addObject(healthBar, 130, 30);
             }
         }
         scrollObjects();
@@ -323,61 +324,36 @@ public class ScrollWorld extends World
         drawWall(-15, 0);
         drawWall(-15, 300);
         
-        drawGroundChunk(0, 475, 500, 200, true);
-        drawGroundChunk(300, 475, 500, 200, true);
-        drawGroundChunk(720, 475, 500, 200,  true);
-        drawGroundChunk(1400, 475, 500, 200, true);
-        drawStairs(1820, 475, 380, true);
-        drawGroundChunk(2170, 530, 500, 200, true);
-        drawGroundChunk(2670, 310, 300, 380, true);
+        // Start
+        addObject(new Ground(1, 1500, 200), 600, 560);
+        addObject(new Ground(1, 500, 200), 1790, 560);
         
-        // Area with ice ice and first enemy after jump glide part
-        drawGroundChunk(2965, 475, 750, 200, true);
-        
-        // Landing after ice, goes out ot penguin room
-        drawGroundChunk(3940, 475, 2900, 200, true);
+        // Stairs Jump
+        drawStairs(1825, 475, 410, true);
+        addObject(new Ground(1, 400, 400), 2920, 460);
+        addObject(new Ground(1, 550, 200), 2470, 615);
+        addObject(new Ground(1, 750, 200), 3490, 560);
         
         // Big mountain
-        int ystart = 420;
-        int currLength = 150;
-        for (int i = 4240; i < 5600; i += 30) {
-            for (int k = ystart; k < 410; k += 30) {
-                if (i > 4330) {
-                if (k == ystart) {
-                   addObject(new Ground(3), i, k);
-                }
-                else {
-                    addObject(new Ground(4), i, k);
-                }
-            }
-                
-            }
-            currLength += 150;
-            ystart -= 10;
-        }
-        for (int i = 4360; i < 5500; i += 30) {
-            addObject(new Ground(4), i, 405);
-        }
+        addObject(new Ground(1, 2000, 200), 5130, 560);
+        addObject(new Ground(1, 1300, 50), 5000, 400);
+        addObject(new Ground(1, 900, 600), 5200, 100);
+        addObject(new Ground(1, 900, 500), 6100, 0);
+        addObject(new Ground(1, 500, 950), 6380, 130);
         
-        // Three platforms
-        drawGroundChunk(4350, -170, 700, 100, true);
-        drawGroundChunk(3650, -290, 700, 230, true);
-        drawGroundChunk(2950, -410, 700, 360, true);
+        
+        // Platforms
+        addObject(new Ground(1, 150, 30), 4300, 240);
+        addObject(new Ground(1, 150, 30), 4500, 85);
+        addObject(new Ground(1, 150, 30), 4300, -20);
+        addObject(new Ground(1, 150, 30), 4600, -120);
+        addObject(new Ground(1, 150, 30), 4380, -300);
+        
+        // Sky platforms
+        addObject(new Ground(1, 750, 100), 3600, -220);
+        addObject(new Ground(1, 750, 190), 2870, -265);
+        addObject(new Ground(1, 750, 280), 2140, -310);
        
-        
-        // Final area (underdeveloped)
-        drawGroundChunk(5608, -200, 500, 450, true);
-        drawGroundChunk(6108, -200, 480, 1000, true);
-
-        
-       
-        //drawCeilingChunk(0, 100, true);
-        //drawCeilingChunk(600, 100, true);
-        //drawCeilingChunk(1200, 100, true);
-        // drawCeilingChunk(1800, 100, true);
-        int start = 480;
-       
-        
     }
     
     public Actor getMainActor(){

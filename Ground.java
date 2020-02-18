@@ -30,12 +30,107 @@ public class Ground extends Solid
                                        };
                                     
     
-    // 1 for surface, 0 for subsurface                            
+    // 1 for surface, 0 for subsurface  
+    public Ground(int type, int width, int height) {
+        super();
+        Random r = new Random();
+        GreenfootImage img;
+        int index = r.nextInt(3);
+        
+        
+        if (type == 3) {
+            img = new GreenfootImage(width, height);
+            img.drawImage(new GreenfootImage("Cave_ground3.png"), 0, 0);
+            int xStart = 0;
+            int yStart = height;
+            for (int y = yStart; y > 0; y -= 30) {
+                for (int x = xStart; x < width; x += 30) {
+                    GreenfootImage draw;
+                    if (x == xStart) {
+                        draw = new GreenfootImage(surface_cave[index]);
+                    } else {
+                        draw = new GreenfootImage(subsurface_cave[index]);
+                    }
+                    draw.scale(30, 30);
+                    img.drawImage(draw, x, y);
+                    index = r.nextInt(3);
+                }
+                xStart += 30;
+                yStart -= 30;
+            }
+            setImage(img);    
+       }
+        
+       if (type == 2) {
+        
+            img = new GreenfootImage(width, height);
+            img.drawImage(new GreenfootImage("Cave_ground3.png"), 0, 0);
+            
+            for (int y = 0; y < height; y += 30) {
+                for (int x = 0; x < width; x += 30) {
+                    GreenfootImage draw;
+                    if ((y + 30) >= height) {
+                        draw = new GreenfootImage(surface_cave[index]);
+                        draw.mirrorVertically();
+                    } else {
+                        draw = new GreenfootImage(subsurface_cave[index]);
+                    }
+                    draw.scale(30, 30);
+                    
+                    img.drawImage(draw, x, y);
+                    index = r.nextInt(3);
+                }
+            }
+            setImage(img);
+        }
+        
+        if (type == 1) {
+
+            img = new GreenfootImage(width, height);
+            img.drawImage(new GreenfootImage("Cave_ground3.png"), 0, 0);
+            
+            for (int y = 0; y < height; y += 30) {
+                for (int x = 0; x < width; x += 30) {
+                    GreenfootImage draw;
+                    if (y == 0) {
+                        draw = new GreenfootImage(surface_cave[index]);
+                    } else {
+                        draw = new GreenfootImage(subsurface_cave[index]);
+                    }
+                    draw.scale(30, 30);
+                    img.drawImage(draw, x, y);
+                    index = r.nextInt(3);
+                }
+            }
+            setImage(img);
+        }
+        
+    }
+    
     public Ground(int type) {
         super();
         Random r = new Random();
         GreenfootImage img;
         int index = r.nextInt(3);
+        if (type == 6) {
+            img = new GreenfootImage(3000, 200);
+            img.drawImage(new GreenfootImage("Cave_ground3.png"), 0, 0);
+            
+            for (int y = 0; y < 200; y += 30) {
+                for (int x = 0; x < 3000; x += 30) {
+                    GreenfootImage draw;
+                    if (y == 0) {
+                        draw = new GreenfootImage(surface_cave[index]);
+                    } else {
+                        draw = new GreenfootImage(subsurface_cave[index]);
+                    }
+                    draw.scale(30, 30);
+                    img.drawImage(draw, x, y);
+                    index = r.nextInt(3);
+                }
+            }
+            setImage(img);
+        }
         if (type == 5) {
             img = new GreenfootImage(surface_images[index]);
             img.scale(15, 15);

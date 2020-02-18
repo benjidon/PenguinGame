@@ -28,5 +28,16 @@ public class Projectile extends Actor
         } else {
             setLocation(getX() + direction * velocity, getY());
         }
+        try{
+           Slippy slippy = (Slippy)getOneIntersectingObject(Slippy.class);  
+          
+            if(slippy != null && !slippy.isSliding())  
+            {  
+                slippy.damage();
+                getWorld().removeObject(this);
+            }
+        } catch (IllegalStateException e){
+            return;
+        }
     }
 }
