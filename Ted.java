@@ -9,6 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Ted extends Character
 {   
     private boolean hasSpoken = false;
+    private boolean doneSpeaking = false;
     private Message m = new Message(2);
     private int counter = 0;
     
@@ -31,10 +32,12 @@ public class Ted extends Character
             m.getImage().scale(900, 125);
             hasSpoken = true;
         }
-        if(hasSpoken){
+        if(hasSpoken && !doneSpeaking){
+            m.setLocation(480, 570);
             ++counter;
         }
         if(counter == 300){
+            doneSpeaking = true;
             s.unfreeze();
             world.removeObject(m);
         }
