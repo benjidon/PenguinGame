@@ -59,7 +59,7 @@ public class ScrollWorld extends World
         {
             music.playLoop();
             playing = true;
-            music.setVolume(0);
+            music.setVolume(100);
         }
         
         buildWorld();
